@@ -21,9 +21,17 @@ def predict_churn(customer_data) :
 
     prediction = int(probability >= 0.5) 
 
+    if probability < 0.30 : 
+        risk_level = "Low" 
+    elif probability < 0.70 : 
+        risk_level = "Medium" 
+    else : 
+        risk_level = "High"
+
     return {
         "prediction" : "Likely to Churn" if prediction == 1 else "Likely to Stay",
-        "churn_probability" : round(probability , 4) 
+        "churn_probability" : round(probability , 4),
+        "risk_level" : risk_level
     } 
 
 if __name__ == "__main__" : 
@@ -54,3 +62,4 @@ if __name__ == "__main__" :
 
     print("Prediction :" , result['prediction']) 
     print("Churn Probability :" , result['churn_probability'])
+    print("Risk Level :" , result['risk_level']) 
