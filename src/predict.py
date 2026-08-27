@@ -61,5 +61,5 @@ if __name__ == "__main__" :
     result = predict_churn(customer) 
 
     print("Prediction :" , result['prediction']) 
-    print("Churn Probability :" , result['churn_probability'])
+    print("Churn Probability :" , f"{result['churn_probability']:.2%}")
     print("Risk Level :" , result['risk_level']) 
