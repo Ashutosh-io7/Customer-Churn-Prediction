@@ -18,6 +18,20 @@ explainer = shap.TreeExplainer(model)
 feature_names = preprocessor.get_feature_names_out()
 
 def predict_churn(customer_data) : 
+
+    required_features = preprocessor.feature_names_in_ 
+
+    missing_features = [
+        feature for feature in required_features 
+        if feature not in customer_data 
+    ] 
+
+    if missing_features : 
+        raise ValueError(
+            f"Missing Required Features : {missing_features}"
+        )
+
+
     data = pd.DataFrame([customer_data]) 
 
     transformed_data = preprocessor.transform(data)
