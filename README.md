@@ -1,30 +1,150 @@
 # Customer Churn Prediction
 
-An end-to-end Machine Learning project to predict customer churn using demographic, account, and service usage data.
+An end-to-end Machine Learning project that predicts whether a customer is likely to churn and explains the factors influencing the prediction.
 
-## Project Overview
-- **Data Preprocessing (`notebooks/01_data_prep.ipynb`):** Cleaning missing values, feature scaling, and encoding categorical variables.
-- **Model Training (`notebooks/02_model_training.ipynb`):** Training classification models, hyperparameter tuning, and evaluating performance metrics (ROC-AUC, Precision, Recall).
+## Overview
 
-## Repository Structure
+This project implements a complete customer churn prediction pipeline:
+
+- Data preprocessing and cleaning
+- Categorical feature encoding and numerical feature scaling
+- Training multiple classification models
+- Random Forest hyperparameter tuning
+- Model evaluation and comparison
+- Churn probability and risk-level prediction
+- SHAP-based explainability for individual predictions
+
+## Machine Learning Models
+
+The project evaluates:
+
+- Logistic Regression
+- Random Forest
+- XGBoost
+
+The **tuned Random Forest** was selected as the final model based on its overall performance.
+
+## Model Performance
+
+| Model | Accuracy | Precision | Recall | F1-Score | ROC-AUC |
+|---|---:|---:|---:|---:|---:|
+| Logistic Regression | — | — | — | — | — |
+| Tuned Random Forest | 76.36% | 53.80% | 77.54% | 63.52% | 84.44% |
+| XGBoost | — | — | 81.28% | — | — |
+
+> The tuned Random Forest achieved an ROC-AUC of 84.44% and was selected as the final model.
+
+## Prediction
+
+The prediction pipeline provides:
+
+- Churn prediction
+- Churn probability
+- Risk level: Low / Medium / High
+- Top factors influencing the prediction
+
+Example:
+
 ```text
-├── data/              # Raw and processed datasets
-├── notebooks/         # Step-by-step Jupyter notebooks
-├── requirements.txt   # Required Python packages
-└── README.md          # Project documentation
+Prediction        : Likely to Churn
+Churn Probability : 77.85%
+Risk Level        : High
+
+Top Factors:
+- InternetService : Fiber optic → increases churn risk
+- Contract : Month-to-month → increases churn risk
+- PaymentMethod : Electronic check → increases churn risk
+- tenure : 12 → increases churn risk
+- OnlineSecurity : No → increases churn risk
 ```
 
-## Getting Started 
-1. Clone the repository : 
-```bash 
-git clone [https://github.com/Ashutosh-io7/Customer-Churn-Prediction.git](https://github.com/Ashutosh-io7/Customer-Churn-Prediction.git) 
-cd Customer-Churn-Prediction 
+## Explainability
+
+SHAP is used to understand how features influence the model's predictions.
+
+For an individual customer, SHAP identifies the features that increase or decrease the predicted churn risk.
+
+This makes the model more interpretable instead of providing only a churn prediction.
+
+## Project Structure
+
+```text
+Customer-Churn-Prediction/
+│
+├── data/
+│   ├── Telco-Customer-Churn.csv
+│   └── processed/
+│       ├── x_train.csv
+│       ├── x_test.csv
+│       ├── y_train.csv
+│       └── y_test.csv
+│
+├── notebooks/
+│   ├── 01_data_prep.ipynb
+│   ├── 02_model_training.ipynb
+│   ├── churn_preprocessor.joblib
+│   └── churn_tuned_rf_model.joblib
+│
+├── src/
+│   └── predict.py
+│
+├── .gitignore
+├── requirements.txt
+└── README.md
 ```
 
-2. Install dependencies : 
-```bash 
+## Tech Stack
+
+- Python
+- Pandas 
+- Scikit-learn
+- XGBoost
+- SHAP
+- Matplotlib
+- Seaborn
+- Jupyter Notebook
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Ashutosh-io7/Customer-Churn-Prediction.git
+cd Customer-Churn-Prediction
+```
+
+### 2. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-3. Run the notebooks : 
-Launch Jupyter Notebook or JupyterLab and run the notebooks in sequence.
+### 3. Run the notebooks
+
+Open Jupyter Notebook or JupyterLab and run:
+
+```text
+01_data_prep.ipynb
+02_model_training.ipynb
+```
+
+### 4. Run a prediction
+
+```bash
+python src/predict.py
+```
+
+## Key Insights
+
+The model identifies factors such as:
+
+- Tenure
+- Contract type
+- Internet service
+- Payment method
+- Online security
+- Monthly charges
+
+as important factors in churn predictions.
+
+> SHAP explanations describe how features influence the model's prediction. They should not be interpreted as evidence that a feature directly causes customer churn.
