@@ -28,9 +28,9 @@ The **tuned Random Forest** was selected as the final model based on its overall
 
 | Model | Accuracy | Precision | Recall | F1-Score | ROC-AUC |
 |---|---:|---:|---:|---:|---:|
-| Logistic Regression | — | — | — | — | — |
+| Logistic Regression | 76.22% | 53.98% | 70.58% | 61.18% | 84.17% |
 | Tuned Random Forest | 76.36% | 53.80% | 77.54% | 63.52% | 84.44% |
-| XGBoost | — | — | 81.28% | — | — |
+| XGBoost | 74.80% | 51.61% | 81.28% | 63.13% | 84.40% |
 
 > The tuned Random Forest achieved an ROC-AUC of 84.44% and was selected as the final model.
 
